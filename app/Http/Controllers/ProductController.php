@@ -12,18 +12,18 @@ use App\Swagger\AllProductsResponseValues;
 class ProductController extends Controller
 {
     /**
- * @OA\Get(
- *     tags={"All Products"},
- *     summary="Returns a list of products",
- *     description="Returns a array of products",
- *     path="/api/v1/allproducts",
- *     @OA\Response(
- *         response=200,
- *         description="successful operation",
- *        @OA\JsonContent(ref="#/components/schemas/AllProductsResponse")
- *     ),
- * )
- */
+     * @OA\Get(
+     *     tags={"All Products"},
+     *     summary="Returns a list of products",
+     *     description="Returns a array of products",
+     *     path="/api/v1/allproducts",
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation",
+     *        @OA\JsonContent(ref="#/components/schemas/AllProductsResponse")
+     *     ),
+     * )
+     */
     public function allProducts() {
 
         $array = [];

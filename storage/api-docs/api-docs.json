@@ -26,6 +26,61 @@
                     }
                 }
             }
+        },
+        "/api/v1/allsales": {
+            "get": {
+                "tags": [
+                    "All Sales"
+                ],
+                "summary": "Returns a list of sales",
+                "description": "Returns a array of sales",
+                "operationId": "97b0905c2a8eb06960a57a394adb8820",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AllSalesResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/sale/{id}": {
+            "get": {
+                "tags": [
+                    "Sale"
+                ],
+                "summary": "Returns a sale",
+                "description": "Returns a specified sale",
+                "operationId": "5acd66cbc7832df8ab8916e97266187c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Sale Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AllSalesResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -101,6 +156,80 @@
                     "description": {
                         "title": "Description",
                         "description": "Description",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "AllSalesResponse": {
+                "properties": {
+                    "values": {
+                        "title": "Code",
+                        "description": "Code",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/AllSalesResponseValues"
+                        }
+                    },
+                    "success": {
+                        "title": "Success",
+                        "description": "Success",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "title": "Message",
+                        "description": "Message",
+                        "type": "string"
+                    },
+                    "error": {
+                        "title": "Error",
+                        "description": "Error",
+                        "type": "boolean"
+                    },
+                    "errormessages": {
+                        "title": "Error messages",
+                        "description": "Error Messages",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "id"
+                        }
+                    },
+                    "warning": {
+                        "title": "Warning",
+                        "description": "Warning",
+                        "type": "boolean"
+                    },
+                    "warningmessages": {
+                        "title": "Warning Messages",
+                        "description": "Warning Messages",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "id"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "AllSalesResponseValues": {
+                "properties": {
+                    "products": {
+                        "title": "Code",
+                        "description": "Code",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/AllProductsResponseValues"
+                        }
+                    },
+                    "sale_id": {
+                        "title": "Sale Id",
+                        "description": "Sale ID",
+                        "type": "integer"
+                    },
+                    "amount": {
+                        "title": "Amount",
+                        "description": "Amount",
                         "type": "string"
                     }
                 },

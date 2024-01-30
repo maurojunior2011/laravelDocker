@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SaleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,5 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['prefix'=>'/v1'], function(){
     Route::get('/allproducts', [ProductController::class, 'allProducts']);
+    Route::get('/allsales', [SaleController::class, 'allSales']);
+    Route::get('/sale/{sale}', [SaleController::class, 'sale']);
 });
 
