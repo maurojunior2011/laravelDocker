@@ -6,6 +6,8 @@ use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Http\JsonResponse;
+use App\Swagger\AllProductsResponse;
+use App\Swagger\AllProductsResponseValues;
 
 class ProductController extends Controller
 {
@@ -23,20 +25,16 @@ class ProductController extends Controller
  * )
  */
     public function allProducts() {
-        $errormessages = []; //to possible validation
-        $warningmessages = []; //to possible validation
-        $error = false; //to possible validation
-        $warning = false; //to possible validation
-        $values = Product::get(['id','name','price', 'description']);
 
-        return new JsonResponse([
-            'values' => $values,
-            'success' => ($error) ? false : true,
-            'message' => $error ? 'Erro ao buscar os dados!' : ($warning ? 'Sucesso com avisos!' : 'Sucesso!'),
-            'errors' => count($errormessages),
-            'errormessages' => $errormessages,
-            'warnings' => count($warningmessages),
-            'warningmessages' => $warningmessages
-        ], $error ? 400 : 200);        
+        $array = [];
+        
+        $list = Product::get(['id','name','price', 'description']);
+        foreach ($list as $item){
+            $array[] = new AllProductsResponseValues($item->id, $item->name, $item->price, $item->description);
+        }
+
+        $response = new AllProductsResponse($array);
+
+        return new JsonResponse($response, 200);        
     }
 }
