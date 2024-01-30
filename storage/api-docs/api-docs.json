@@ -1,0 +1,27 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Desafio Swagger",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/v1/allproducts": {
+            "get": {
+                "tags": [
+                    "All Products"
+                ],
+                "summary": "Returns a list of products",
+                "description": "Returns a array of products",
+                "operationId": "b5f77d3a05d6df191f0af8d00e6afd0c",
+                "responses": {
+                    "200": {
+                        "description": "A list with/without products"
+                    },
+                    "400": {
+                        "description": "Error"
+                    }
+                }
+            }
+        }
+    }
+}
