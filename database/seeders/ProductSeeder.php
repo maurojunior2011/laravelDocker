@@ -12,6 +12,22 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\Product::factory()->create([
+            'name' => fake()->numerify('Celular ####'),
+            'price' => fake()->randomFloat(2, 1800, 2000),
+            'description' => fake()->text(30)
+        ]);
+
+        \App\Models\Product::factory()->create([
+            'name' => fake()->numerify('Celular ####'),
+            'price' => fake()->randomFloat(2, 1800, 2000),
+            'description' => fake()->text(30)
+        ]);
+
+        \App\Models\Product::factory()->create([
+            'name' => fake()->numerify('Celular ####'),
+            'price' => fake()->randomFloat(2, 1800, 2000),
+            'description' => fake()->text(30)
+        ]);
     }
 }
