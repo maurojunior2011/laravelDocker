@@ -11,7 +11,7 @@ class StoreSaleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,19 @@ class StoreSaleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'products.*' => 'sometimes|required|numeric|exists:App\Models\Product,id'
+        ];
+    }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array<string, string>
+     */
+    public function attributes(): array
+    {
+        return [
+            'products' => 'Produtos'
         ];
     }
 }

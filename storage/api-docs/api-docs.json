@@ -15,12 +15,96 @@
                 "operationId": "b5f77d3a05d6df191f0af8d00e6afd0c",
                 "responses": {
                     "200": {
-                        "description": "A list with/without products"
-                    },
-                    "400": {
-                        "description": "Error"
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AllProductsResponse"
+                                }
+                            }
+                        }
                     }
                 }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AllProductsResponse": {
+                "properties": {
+                    "values": {
+                        "title": "Code",
+                        "description": "Code",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/AllProductsResponseValues"
+                        }
+                    },
+                    "success": {
+                        "title": "Success",
+                        "description": "Success",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "title": "Message",
+                        "description": "Message",
+                        "type": "string"
+                    },
+                    "error": {
+                        "title": "Error",
+                        "description": "Error",
+                        "type": "boolean"
+                    },
+                    "errormessages": {
+                        "title": "Error messages",
+                        "description": "Error Messages",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "id"
+                        }
+                    },
+                    "warning": {
+                        "title": "Warning",
+                        "description": "Warning",
+                        "type": "boolean"
+                    },
+                    "warningmessages": {
+                        "title": "Warning Messages",
+                        "description": "Warning Messages",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "id"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "AllProductsResponseValues": {
+                "properties": {
+                    "id": {
+                        "title": "Id",
+                        "description": "Id",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "title": "Name",
+                        "description": "Name",
+                        "type": "string"
+                    },
+                    "price": {
+                        "title": "Price",
+                        "description": "Price",
+                        "type": "string"
+                    },
+                    "description": {
+                        "title": "Description",
+                        "description": "Description",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
             }
         }
     }

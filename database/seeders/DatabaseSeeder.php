@@ -28,9 +28,13 @@ class DatabaseSeeder extends Seeder
         // SALES
 
         $now = Carbon::now();
+
         for($i=1; $i<=$total_sales; $i++) {
+
+            $saleId = $now->format('dmYHmisu');
+
             $factory = \App\Models\Sale::factory()->create([
-                'sale_id' => $now->format('dMYHmis'),
+                'sale_id' => $saleId,
                 'created_at' => $now,
                 'updated_at' => $now
             ]);
@@ -42,7 +46,7 @@ class DatabaseSeeder extends Seeder
                 if((bool)rand(0,1)) {
                     \App\Models\ProductSale::factory()->create([
                         'product_id' => $j,
-                        'sale_id' => $now->format('dMYHmis'),
+                        'sale_id' => $saleId,
                         'created_at' => $now,
                         'updated_at' => $now
                     ]);
@@ -53,7 +57,7 @@ class DatabaseSeeder extends Seeder
             if(!$existProduct) {
                 \App\Models\ProductSale::factory()->create([
                     'product_id' => 1,
-                    'sale_id' => $now->format('dMYHmis'),
+                    'sale_id' => $saleId,
                     'created_at' => $now,
                     'updated_at' => $now
                 ]);

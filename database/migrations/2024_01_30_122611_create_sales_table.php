@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sales', function (Blueprint $table) {
-            $table->string('sale_id', 20);
+            $table->string('sale_id', 30);
             $table->primary('sale_id');
             $table->timestamps();
             $table->softDeletes();
