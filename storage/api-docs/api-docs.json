@@ -81,6 +81,40 @@
                     }
                 }
             }
+        },
+        "/api/v1/sale": {
+            "post": {
+                "tags": [
+                    "Sale"
+                ],
+                "summary": "Returns a sale",
+                "description": "Returns a specified sale",
+                "operationId": "884ebbaf0fdf379d5b652429460c3e8c",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NewSaleRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AllSalesResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -231,6 +265,19 @@
                         "title": "Amount",
                         "description": "Amount",
                         "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "NewSaleRequest": {
+                "properties": {
+                    "products": {
+                        "title": "ids",
+                        "description": "ids",
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
                     }
                 },
                 "type": "object"

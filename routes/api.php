@@ -24,5 +24,6 @@ Route::group(['prefix'=>'/v1'], function(){
     Route::get('/allproducts', [ProductController::class, 'allProducts']);
     Route::get('/allsales', [SaleController::class, 'allSales']);
     Route::get('/sale/{sale}', [SaleController::class, 'sale']);
+    Route::post('/sale', [SaleController::class, 'newSale']);
 });
 

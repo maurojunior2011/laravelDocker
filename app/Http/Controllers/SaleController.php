@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Sale;
+use App\Models\ProductSale;
 use App\Http\Requests\StoreSaleRequest;
 use App\Http\Requests\UpdateSaleRequest;
 use Illuminate\Http\JsonResponse;
@@ -71,6 +73,62 @@ class SaleController extends Controller
      * )
      */
     public function sale(Sale $sale) {
+
+        $return = [];
+
+        $list = [$sale];
+        foreach ($list as $item){
+
+            $array = [];
+            $total = 0;
+            foreach($item->products as $prod) {
+                $array[] = new AllProductsResponseValues($prod->id, $prod->name, $prod->price, $prod->description);
+                $total += $prod->price;
+            }
+
+            $return[] = new AllSalesResponseValues($array, $item->sale_id, round($total, 2));
+        }
+
+        $response = new AllSalesResponse($return);
+
+        return new JsonResponse($response, 200);        
+    }
+
+    /**
+     * @OA\Post(
+     *     tags={"Sale"},
+     *     summary="Returns a sale",
+     *     description="Returns a specified sale",
+     *     path="/api/v1/sale",
+     * @OA\RequestBody(
+     * @OA\JsonContent(ref="#/components/schemas/NewSaleRequest")
+    *      ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation",
+     *        @OA\JsonContent(ref="#/components/schemas/AllSalesResponse")
+     *     ),
+     *      @OA\Response(
+     *         response=404,
+     *         description="not found"
+     *     ),
+     * )
+     */
+    public function newSale(StoreSaleRequest $request) {
+
+        $sale = new Sale();
+        $now = Carbon::now();
+        $saleId = $now->format('dmYHmisu');
+            
+        $sale->sale_id = $saleId;
+        $sale->save();
+
+        foreach ($request->products as $item){
+            $new = new ProductSale();
+            $new->product_id = $item;
+            $new->sale_id = $saleId;
+            $new->save();
+        }
 
         $return = [];
 
