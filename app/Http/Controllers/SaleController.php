@@ -73,7 +73,6 @@ class SaleController extends Controller
     public function sale(Sale $sale) {
 
         $return = [];
-        dd($sale);
 
         $list = [$sale];
         foreach ($list as $item){
